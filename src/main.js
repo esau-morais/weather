@@ -22,6 +22,13 @@ dotenv.config();
 
   const temperature = forecastData.DailyForecasts[0].Temperature;
 
+  const tenorRequest = await fetch(
+    `https://g.tenor.com/v1/search?key=${process.env.TENOR_API_KEY}&limit=1&contentfilter=low`
+  );
+  const tenorData = await tenorRequest.json();
+
+  const gif = tenorData.results[0].media;
+
   const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 465,
@@ -37,14 +44,22 @@ dotenv.config();
     to: process.env.MAIL_TO, // list of receivers
     subject: "✔ Daily weather report", // Subject line
     text: `
-            Daily weather report
+            ☁️ Daily weather report
+
+            Weather
+            - Forecast: ${forecastData.Headline.Text}
+            ➡️ Min: ${temperature.Minimum.Value}° ${temperature.Minimum.Unit}
+            ➡️ Max: ${temperature.Maximum.Value}° ${temperature.Maximum.Unit}
+
+            Daily GIF
         `, // plain text body
     html: `
             <h1>Daily weather report</h1>
             <h2>Weather</h2>
+            <p><img src="${gif[0].tinygif.url}" /></p>
             <p>Forecast: ${forecastData.Headline.Text}</p>
-            <p>Min: ${temperature.Minimum.Value}° ${temperature.Minimum.Unit}</p>
-            <p>Max: ${temperature.Maximum.Value}° ${temperature.Maximum.Unit}</p>
+            <p>➡️ Min: ${temperature.Minimum.Value}° ${temperature.Minimum.Unit}</p>
+            <p>➡️ Max: ${temperature.Maximum.Value}° ${temperature.Maximum.Unit}</p>
         `, // html body
   });
 })();

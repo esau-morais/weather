@@ -11,6 +11,7 @@ env:
   MAIL_FROM: ${{ secrets.MAIL_FROM }}
   MAIL_TO: ${{ secrets.MAIL_TO }}
   ACCU_WEATHER_API_KEY: ${{ secrets.ACCU_WEATHER_API_KEY }}
+  TENOR_API_KEY: ${{ secrets.TENOR_API_KEY }}
 
 jobs:
   build:
