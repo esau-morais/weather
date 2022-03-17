@@ -16,7 +16,7 @@ const nodemailer = require("nodemailer");
 
       await transporter.sendMail({
         from: `"Esaú Morais 🧑‍💻" <${process.env.MAIL_FROM}>`, // sender address
-        to: "esaumorais7@gmail.com", // list of receivers
+        to: process.env.MAIL_TO, // list of receivers
         subject: "✔ Daily weather report", // Subject line
         text: `
             Daily weather report
@@ -25,4 +25,4 @@ const nodemailer = require("nodemailer");
             <h1>Daily weather report</h1>
         `, // html body
       });
-})()
+})()    
