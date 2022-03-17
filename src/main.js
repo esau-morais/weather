@@ -51,7 +51,7 @@ dotenv.config();
             ➡️ Min: ${temperature.Minimum.Value}° ${temperature.Minimum.Unit}
             ➡️ Max: ${temperature.Maximum.Value}° ${temperature.Maximum.Unit}
 
-            Daily GIF
+            Daily GIF: ${gif[0].tinygif.url}
         `, // plain text body
     html: `
             <h1>Daily weather report</h1>
